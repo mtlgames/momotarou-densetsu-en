@@ -7,6 +7,7 @@ that corpus with the runtime codec (including English digraphs), without --orig.
 import argparse
 import hashlib
 import json
+import re
 import struct
 import subprocess
 import sys
@@ -142,6 +143,7 @@ def scan(image, out):
                 if actual != expected:
                     raise ValueError(f'{loc} {s["id"]}: final disc differs from current release text')
                 locations.append(f'{len(corpus):08x}\t{loc}@{off:x}\t{s["id"]}')
+                assert len(actual) % 2 == 0, s['id']   # keeps every string on the even phase (jp_left filter)
                 corpus.extend(actual)
                 strings += 1
     # Check the real EXE against the production transformation of the clean EXE.
@@ -161,11 +163,18 @@ def scan(image, out):
     payload.write_bytes(corpus)
     (out / 'locations.tsv').write_text('\n'.join(locations) + '\n', encoding='utf-8', newline='\n')
     cmd = [sys.executable, '-X', 'utf8', str(Path(SKILL) / 'scripts/jp_left.py'), str(payload),
-           '--tbl', str(table), '--le16', '--min', '1', '--kanji-runs']
+           '--tbl', str(table), '--le16', '--min', '1', '--kanji-runs', '--limit', '0']
     result = subprocess.run(cmd, capture_output=True, text=True, encoding='utf-8')
-    (out / 'jp_left.txt').write_text(result.stdout + result.stderr, encoding='utf-8')
-    print(result.stdout, end='')
-    if result.returncode:
+    if result.stderr.strip() or not result.stdout.rstrip().endswith('bytes'):
+        raise ValueError(f'jp_left failed: {result.stderr[-500:]}')
+    # --le16 also reads the odd byte phase; every string in this corpus is whole u16 codes from an even offset,
+    # so odd-phase runs are straddled code halves, not text.
+    runs = [ln for ln in result.stdout.splitlines() if re.match(r'0x[0-9A-F]+ ', ln)]
+    real = [ln for ln in runs if int(ln.split()[0], 16) % 2 == 0]
+    report_text = '\n'.join(real) + f'\n{len(real)} even-phase runs ({len(runs) - len(real)} odd-phase ignored)\n'
+    (out / 'jp_left.txt').write_text(report_text, encoding='utf-8')
+    print(report_text, end='')
+    if real:
         raise ValueError('unintended Japanese in reachable release text; see jp_left.txt')
     report = {'image': str(image), 'sha1': hashlib.sha1(Path(image).read_bytes()).hexdigest(),
               'containers': copies, 'strings_including_copies': strings, 'bytes_scanned': len(corpus),

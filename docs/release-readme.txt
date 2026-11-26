@@ -31,6 +31,15 @@ CRC32: @PATCHED_CRC32@
 MD5: @PATCHED_MD5@
 SHA-1: @PATCHED_SHA1@
 
+CHANGES IN v1.1
+- Faster text printing (about 2x at every text-speed setting). English needs
+  about twice as many letters as Japanese, so lines printed slowly and could
+  look blank or cut off while still printing.
+- "Urashima" is no longer cut to "Urashim" in the field and battle status boxes.
+- Mouse village signs: Doctor, Tea and Weapons signs had the wrong words
+  (INN, BANK, DOC); the Inn and Bank signs were still Japanese.
+Thanks to AntonioNero (RetroGameTalk) for reporting these.
+
 TRANSLATION STATUS
 Dialogue, story, menus, items, skills and system messages: English.
 Readable signs, banners, cards, minigames and ending lettering: English.
@@ -43,7 +52,7 @@ no prices or dishes were invented. The tongue-twister board retains its
 internal Japanese game data; player-facing instructions are English.
 
 TESTING AND LIMITATIONS
-Tested with PCSX-Redux nightly 29954.20261029.10 x64 and a Japanese PS1 BIOS.
+Tested with PCSX-Redux nightly 32777.20261125.16 x64 and a Japanese PS1 BIOS.
 The final image passed cold-boot smoke, automated scene routes, text/engine
 checks, independent visual review and chapter-level story review. Routes
 use external debugger warps; the release image contains no injected debug
@@ -65,7 +74,7 @@ rendered as pixels. Full font provenance and licences are in the source repo.
 Tools: PCSX-Redux, mkpsxiso/dumpsxiso, xdelta3 and the retro-translation skill.
 
 Source, build instructions and bug reports:
-https://github.com/minhnhattonthat/momotarou-densetsu-en
+https://github.com/mtlgames/momotarou-densetsu-en
 For a bug report, include the patch version, emulator, steps and a savestate
 if available. The source repository contains decisions and QA limitations.
 
