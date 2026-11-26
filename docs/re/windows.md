@@ -25,7 +25,7 @@ fits when the sum of its advances minus 1 is at most the budget. Never derive a 
 | Card album | - | - | - | - | - | no script text: index, cards and labels are graphics (docs/re/graphics.md, CR_PG*) |
 | Battle messages | FONT_10/11 + {str} monster/party names (FONT_7) | 48 | 281 | 234 px incl. the longest inserted name | 3 | measured: battle (marker `[4.126] The[0.1] The quick brown fox`, `work/qa/battle_cmd/`) |
 | Glyph torture line | SHOP:347 via `--qa` | 48 | - | - | 3 | booted: every printable glyph draws (`@` is a heart in en12.txt), double spaces keep 8 px; `work/qa/torture/f000230.png` |
-| HUD name box (top centre) | party names (FONT_6 :536..) | 148 | interior ~192 | 44 px | 1 | measured: menu_soubi (桃太郎 148..186) |
+| HUD name box (top centre) | party names (FONT_6 :536..) | 148 | interior ~192 | 44 px | 1 | measured: menu_soubi (桃太郎 148..186). Name x per character: EXE table 0x800E3414 (9, 9, 16, 9); Urashima's 16 clipped its final a, now 9 (issue #1; `menu_bag`, `battle_party` show all four) |
 | HUD stat labels (体 技 under the name) | FONT_6 :551, :553 | 146 | number at ~158 | 12 px | 1 | measured: menu_soubi; done in phase 7: 8x8 cells redrawn as HP / SP / Lv (engine.SMALL) |
 | Equip slot label (武 防 足) | FONT_6 | 168 | item name at 190 | 20 px | 1 | measured: menu_soubi |
 | Equip slot item name | FONT_6 items | 190 | interior ~293 | 103 px | 1 | measured: menu_soubi |

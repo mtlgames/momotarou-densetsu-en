@@ -51,6 +51,7 @@ def allowed():
     exe += [(lo - engine.EXE_BASE, hi - engine.EXE_BASE) for lo, hi in ((engine.HOOK, engine.FREE1_END),
                                                                          (engine.DIGRAPH, engine.FREE2_END))]
     exe += [(g, g + 4 * engine.GRID_CELLS) for g in (engine.GRID_FIRST, engine.GRID_ALNUM)]
+    exe += [(a - engine.EXE_BASE, a - engine.EXE_BASE + len(old)) for a, old, _ in engine.EXE_DATA]
     for loc, off, old, _ in engine.OVERLAY_PATCH:        # window descriptors widened in map overlays
         out.setdefault(loc, []).append((off, off + len(old)))
     maze_loc = '0/07HMAP/HMAP2606.PAC:65'

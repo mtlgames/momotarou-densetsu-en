@@ -72,8 +72,13 @@ PLATE_KINDS = [
      (2, 17), 6, 7, 7, ['06CITY/SMAP16.PAC:6']),
     ('06CITY/SMAP27.PAC:3', (192, 175), 56, 17, ['GROCER'], (12, 13, 14),
      (2, 16), 12, 13, 6, ['06CITY/SMAP27.PAC:3', '06CITY/SMAP28.PAC:3']),
-    ('06CITY/SMAP03B.PAC:3', (72, 176), 16, 20, ['BANK', 'INN', 'ARM', 'SHOE', 'DOC'], (13, 14),
-     (2, 20), 13, 14, 10, ['06CITY/SMAP03B.PAC:3']),
+    # mouse village (maps 4/5, identical tilesets): plate row 茶 医 防 足 武, plus baked 宿 and 銭 signs (issue #1)
+    ('06CITY/SMAP03B.PAC:3', (72, 176), 16, 20, ['TEA', 'DOC', 'ARM', 'SHOE', 'WPN'], (13, 14),
+     (2, 20), 13, 14, 10, ['06CITY/SMAP03B.PAC:3', '06CITY/SMAP03.PAC:3']),
+    ('06CITY/SMAP03B.PAC:3', (232, 192), 16, 20, ['INN'], (13, 14),
+     (2, 20), 13, 14, 10, ['06CITY/SMAP03B.PAC:3', '06CITY/SMAP03.PAC:3']),
+    ('06CITY/SMAP03B.PAC:3', (224, 224), 16, 20, ['BANK'], (13, 14),
+     (2, 20), 13, 14, 10, ['06CITY/SMAP03B.PAC:3', '06CITY/SMAP03.PAC:3']),
 ] + [  # Shuten-doji's cave, 7-tile floor word しゅてんどうじ (DMAP03_92:002): SH u TE N DO U JI, small ゅ -> small U
     ('06DAN01/DMAP03.PAC:0', (x, y), 16, 16, [word], (1, 2, 3), (1, 15), 3, 1, 3 if s == 2 else 8, ['06DAN01/DMAP03.PAC:0'], s)
     for x, y, word, s in ((64, 160, 'SH', 2), (64, 176, 'U', 1), (64, 192, 'TE', 2), (64, 208, 'N', 2), (64, 224, 'DO', 2),

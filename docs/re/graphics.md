@@ -28,6 +28,9 @@ details are adapted under D13; the readable ADULT/CHILD labels are translated.
 - Town sweep found additional glyphs omitted by the original plate matching: SMAP03B:3 stone signs (map 5),
   SMAP06/0601:6 FLOWER (maps 9/10), SMAP15/1501:6 round-hut signs (maps 20/21), SMAP16:6 PLAY (map 22),
   SMAP27/28:3 GROCER (maps 34/35). All now have explicit PLATE_KINDS and cold-boot scenes `signs_*`.
+- Issue #1 (2026-11-26): the mouse village row is 茶 医 防 足 武 (was mislabelled BANK INN ARM SHOE DOC), now
+  TEA DOC ARM SHOE WPN; its baked 宿 / 銭 stone signs (SMAP03B:3 (232,192) / (224,224)) are now INN / BANK, and
+  SMAP03:3 (map 4, identical) gets the same. Checked against the JP disc at map:5:30:20 and map:5:20:12.
   The round-hut :3 small variants are also translated; the larger :6 plates are the ones seen in-game.
 - Wood SHOE/WPN/ARM and the thatched-roof INN were seen on map 34. CLOTH, BATH and CARD DOJO were seen on map 22.
   RESTAURANT was later found at map 22 tile 107,13; the earlier camera grid had missed it. KIMONO has no shipped

@@ -97,6 +97,14 @@ PATCH = [                        # (address, original, replacement)
     (0x8003EEE4, 'lw $a2, 0x3c8($gp)', 'j 0x8003efb8'),               # past the draw and its x -= 8
     (0x8003EEE8, 'addiu $v0, $v1, -4', 'sh $v0, 0x3e4($gp)'),
 ]
+# Field HUD name x per character (u16 at 0x800E3414, read by 0x800D876C): Urashima was 16 to centre 2 kanji, which
+# pushed the English name's last letter past the box clip ("Urashim", issue #1). Left-align it like the others.
+EXE_DATA = [(0x800E3418, b'\x10\x00', b'\x09\x00')]
+# Typewriter (0x8003BC64): gp+0x418 += 1 per frame + speed[setting], one glyph appears at >= 15. English draws ~2x the
+# glyphs of Japanese, so lines took twice as long and players saw half-typed text (issue #1). Frames per glyph per
+# setting 7/5/2/1 -> 3/2/1/1 (speed 1/2/5/12 -> 4/5/7/12; 15+ would show a whole page at once).
+EXE_DATA += [(0x80016B22 + 8 * i, struct.pack('<H', old), struct.pack('<H', new))
+             for i, (old, new) in enumerate([(1, 4), (2, 5), (5, 7)])]
 # Sheet 0 plane 0 cells 302-303 (日 目, UV 0x60,0xA8): no English text draws Japanese glyphs (lint), so the pair
 # becomes the 24 px "Day" sprite of the status-summary time.
 DAY_CELLS, DAY_ENTRY, DAY_PLANE, DAY_TEXT = 302, 2, 0, 'Day'
@@ -251,6 +259,10 @@ def patch_exe(exe, audit=None):
         ins = next(cs.disasm(bytes(b[o:o + 4]), addr))
         assert f'{ins.mnemonic} {ins.op_str}'.replace(' ', '') == old.replace(' ', ''), (hex(addr), ins.op_str)
         audit.put(o, asm([new], addr), f'engine:{addr:08x}', expected=exe[o:o + 4])
+    for addr, old, new in EXE_DATA:
+        o = addr - EXE_BASE
+        assert exe[o:o + len(old)] == old, hex(addr)
+        audit.put(o, new, f'engine:data:{addr:08x}', expected=old)
     code = asm(hook_asm(), HOOK)
     w = bytes(widths())
     assert len(code) == TABLE - HOOK and TABLE + len(w) <= FREE1_END

@@ -1,6 +1,6 @@
 # Status
 
-Updated 2026-10-31. History is in git; the current evidence below supersedes older failed or partial QA rounds.
+Updated 2026-11-26 (issue #1 fixes at the end). History is in git; the current evidence below supersedes older failed or partial QA rounds.
 
 - **Phase:** 9 complete; all nine phases are complete. The local v1.0 patch-only ZIP is built, reapplied and verified.
   Published 2026-10-31 as GitHub release v1.0 (repo stays private):
@@ -68,6 +68,17 @@ are resolved in `docs/polish.md`, with review provenance in `docs/release.md`.
 
 No next implementation phase is queued. Await playtest feedback or explicit owner overrides; never publish a
 release or change repository visibility as part of this run.
+
+## Post-v1.0 fixes (unreleased; needs a v1.1 patch when the owner decides)
+
+2026-11-26, issue #1 (forum report). Build SHA-1 `f313715a78d4b7e9b58f8ce0f7a5d80763f4e9dc`; check 55 passed,
+lint 0 errors, boot smoke ok. The v1.0 release gates above predate these changes.
+- "Urashim": HUD name x table 0x800E3414 put Urashima at 16 (centred 2 kanji), clipping the final a. Now 9 in
+  field and battle HUD (`menu_bag`, `battle_party`; Yashahime also fits).
+- Blank / half-typed text: no glyph-pool leak or overflow found (600-slot pool, 316 max seen, 0 after closing).
+  The shots match the typewriter mid-print; English took ~2x as long. Speeds now ~2x (D16).
+- Mouse village (map 5) signs: mislabelled plates and two baked 宿/銭 signs fixed (`docs/re/graphics.md`).
+- Not reproduced on the reporter's setup (PSP eboot repack on SwanStation); not checked on that emulator.
 
 ## Open issues and defaults
 
