@@ -5,7 +5,7 @@ Updated 2026-11-26 (issue #1 fixes at the end). History is in git; the current e
 - **Phase:** 9 complete; all nine phases are complete. The local v1.0 patch-only ZIP is built, reapplied and verified.
   Published 2026-10-31 as GitHub release v1.0 (repo stays private):
   https://github.com/minhnhattonthat/momotarou-densetsu-en/releases/tag/v1.0. All seven release gates pass: 258 visual sheets and 13 story chapters.
-- **Latest build:** `build/momotarou_en.bin`, 143,902,416 bytes, SHA-1
+- **Latest build:** v1.1, SHA-1 `bb84e1f65229a9815821fd5ad0aa8f02707a9682` (see v1.1 below). v1.0 was
   `b9efce63146b023d5af12e069f8ccb1d78185ee9`, built 2026-10-30 20:50:21 UTC (2026-10-31 locally).
   Fresh boot smoke passes in `work/qa/release/smoke`. Full check passed 55 tests and 6,027 lint checks with zero
   errors. The actual-disc scan checked 252 containers / 33,669 reachable strings, found zero unintended Japanese,
@@ -69,12 +69,19 @@ are resolved in `docs/polish.md`, with review provenance in `docs/release.md`.
 No next implementation phase is queued. Await playtest feedback or explicit owner overrides; never publish a
 release or change repository visibility as part of this run.
 
-## Post-v1.0 fixes (unreleased; needs a v1.1 patch when the owner decides)
+## v1.1 (released 2026-11-26, issue #1)
 
-2026-11-26, issue #1 (forum report). Build SHA-1 `f313715a78d4b7e9b58f8ce0f7a5d80763f4e9dc`; check 55 passed,
-lint 0 errors, boot smoke ok. The v1.0 release gates above predate these changes.
+Published as GitHub release v1.1 (owner's request): https://github.com/mtlgames/momotarou-densetsu-en/releases/tag/v1.1.
+`release/v1.1/Momotarou_Densetsu_EN_v1.1.zip` SHA-1 `2d4524debc72309cfbb37519a29da5f4e063aed5`; patched image
+SHA-1 `bb84e1f65229a9815821fd5ad0aa8f02707a9682` (CRC32 619937AE), reapplied identical. `release.py --skip-tour`
+passed: 55 tests, lint 0, smoke, JP scan 0 (even phase; see `tools/release_scan.py`), all 7 gates (94-scene tour:
+44 sheets re-reviewed, 2 issues found and fixed below). Logs: `work/phase9/release-v1.1-*.log`.
+Fixes, from a RetroGameTalk report (AntonioNero) on a PSP eboot repack in SwanStation:
 - "Urashim": HUD name x table 0x800E3414 put Urashima at 16 (centred 2 kanji), clipping the final a. Now 9 in
-  field and battle HUD (`menu_bag`, `battle_party`; Yashahime also fits).
+  field and battle HUD (`menu_bag`, `battle_party`). Release review then caught Yashahime's e touching the clip:
+  her x is now 6.
+- Side message box: FONT_6:639-645 (Arts/Items menu messages) were laid out at 234 px but drawn in the 134 px
+  side box, so "...learned any a" was cut (the reporter's shot 6). Now classified `side` in `tools/layout.py`.
 - Blank / half-typed text: no glyph-pool leak or overflow found (600-slot pool, 316 max seen, 0 after closing).
   The shots match the typewriter mid-print; English took ~2x as long. Speeds now ~2x (D16).
 - Mouse village (map 5) signs: mislabelled plates and two baked 宿/銭 signs fixed (`docs/re/graphics.md`).

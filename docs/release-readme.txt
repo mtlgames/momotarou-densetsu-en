@@ -35,7 +35,11 @@ CHANGES IN v1.1
 - Faster text printing (about 2x at every text-speed setting). English needs
   about twice as many letters as Japanese, so lines printed slowly and could
   look blank or cut off while still printing.
-- "Urashima" is no longer cut to "Urashim" in the field and battle status boxes.
+- "Urashima" is no longer cut to "Urashim", and Yashahime's last letter is no
+  longer clipped, in the field and battle status boxes.
+- Arts and Items menu messages ("...hasn't learned any arts!", the empty item
+  bag, throwing items away) now wrap inside the small box beside the menu
+  instead of running past its edge.
 - Mouse village signs: Doctor, Tea and Weapons signs had the wrong words
   (INN, BANK, DOC); the Inn and Bank signs were still Japanese.
 Thanks to AntonioNero (RetroGameTalk) for reporting these.

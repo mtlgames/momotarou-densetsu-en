@@ -8,7 +8,7 @@ fits when the sum of its advances minus 1 is at most the budget. Never derive a 
 |---|---|---|---|---|---|---|
 | Dialogue box (field NPC, shop talk, events, battle messages, minigames, ATOK, title prompts) | SHOP, map tables (06*, 07*, 04HEX, 30EV), BM*, FONT_10/11 | 48 | 281 (interior 38..281) | 234 px | 3 per page ({n}; {wait} pages) | measured: talk_134, ev_00..04, battle, title_load (`work/qa/warp/<scene>/scene.png`); JP lines reach 18 glyphs = 234 px |
 | Field menu commands (2 x 4 grid) | FONT_7 | 28 (col 1), 88 (col 2) | col 2 cursor at 80; interior right 141 | 52 px col 1, 54 px col 2 | 1 | measured: menu, menu_soubi (JP はなす 28..64, しらべる 88..137) |
-| Side message box (item / technique menus' messages) | FONT_10/11, FONT_6 | 160 | 293 (interior 154..293) | 134 px | 3 | measured: menu_dougu, menu_jutsu (どうぐぶくろを / のぞいたが なにも / はいって...) |
+| Side message box (item / technique menus' messages) | FONT_10/11, FONT_6 | 160 | 293 (interior 154..293) | 134 px | 3 | measured: menu_dougu, menu_jutsu (どうぐぶくろを / のぞいたが なにも / はいって...); FONT_6:639-645 draw here (issue #1) |
 | Item list (field menu どうぐ) | FONT_6 item names (id i = FONT_6:060+i) | 27 | interior 17..140, no count column | 114 px | 1 | measured: menu_items (items 1-24 poked) |
 | Item list (battle どうぐ) | same | 32 | interior to ~145 | 114 px | 1 | measured: `work/qa/b_items/final.png` (battle_lists state s005480 + right, circle) |
 | Shop buy list | item names + price | 32 | price right-aligned to 180, 7 px per digit (5 digits from 147) | 110 px | 1 | measured: shop_65_buy |
@@ -25,7 +25,7 @@ fits when the sum of its advances minus 1 is at most the budget. Never derive a 
 | Card album | - | - | - | - | - | no script text: index, cards and labels are graphics (docs/re/graphics.md, CR_PG*) |
 | Battle messages | FONT_10/11 + {str} monster/party names (FONT_7) | 48 | 281 | 234 px incl. the longest inserted name | 3 | measured: battle (marker `[4.126] The[0.1] The quick brown fox`, `work/qa/battle_cmd/`) |
 | Glyph torture line | SHOP:347 via `--qa` | 48 | - | - | 3 | booted: every printable glyph draws (`@` is a heart in en12.txt), double spaces keep 8 px; `work/qa/torture/f000230.png` |
-| HUD name box (top centre) | party names (FONT_6 :536..) | 148 | interior ~192 | 44 px | 1 | measured: menu_soubi (桃太郎 148..186). Name x per character: EXE table 0x800E3414 (9, 9, 16, 9); Urashima's 16 clipped its final a, now 9 (issue #1; `menu_bag`, `battle_party` show all four) |
+| HUD name box (top centre) | party names (FONT_6 :536..) | 148 | interior ~192 | 44 px | 1 | measured: menu_soubi (桃太郎 148..186). Name x per character: EXE table 0x800E3414 (9, 9, 16, 9); Urashima's 16 clipped its final a, now 9; Yashahime (44 px) 6 (issue #1; `menu_bag`, `battle_party` show all four) |
 | HUD stat labels (体 技 under the name) | FONT_6 :551, :553 | 146 | number at ~158 | 12 px | 1 | measured: menu_soubi; done in phase 7: 8x8 cells redrawn as HP / SP / Lv (engine.SMALL) |
 | Equip slot label (武 防 足) | FONT_6 | 168 | item name at 190 | 20 px | 1 | measured: menu_soubi |
 | Equip slot item name | FONT_6 items | 190 | interior ~293 | 103 px | 1 | measured: menu_soubi |

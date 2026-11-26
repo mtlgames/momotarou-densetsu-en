@@ -47,7 +47,8 @@ FONT_6 = [(588, 588, 'bankmenu'), (654, 654, 'bankmenu'),
           (789, 789, 'settings'), (790, 791, 'settingchoice'), (792, 792, 'settings'), (793, 795, 'settingchoice'),
           (530, 530, 'soundtest'), (593, 593, 'equipslot'), (594, 594, 'itemlist'), (646, 647, 'popup'),
           (649, 650, 'popup'), (659, 660, 'op'), (682, 682, 'popup'), (693, 698, 'skill'), (700, 707, 'townwarp'),
-          (733, 740, 'strslot'), (747, 748, 'popup'), (799, 803, 'floor')]
+          (733, 740, 'strslot'), (747, 748, 'popup'), (799, 803, 'floor'),
+          (639, 645, 'side')]  # Arts / Items menu messages (issue #1: "any a" clipped at 234 px)
 FONT_7 = [(3, 9, 'monster'),(10, 16, 'cmd'), (24, 25, 'dlg'), (26, 34, 'cmd'), (35, 271, 'monster')]
 FONT_5 = [(0, 91, 'place'), (94, 98, 'namecmd')]
 SHOP = [(259, 260, 'bankmenu'), (261, 262, 'bankmove'), (263, 263, 'bankbalance'), (342, 343, 'clinic'),

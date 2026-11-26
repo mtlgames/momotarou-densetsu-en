@@ -99,7 +99,7 @@ PATCH = [                        # (address, original, replacement)
 ]
 # Field HUD name x per character (u16 at 0x800E3414, read by 0x800D876C): Urashima was 16 to centre 2 kanji, which
 # pushed the English name's last letter past the box clip ("Urashim", issue #1). Left-align it like the others.
-EXE_DATA = [(0x800E3418, b'\x10\x00', b'\x09\x00')]
+EXE_DATA = [(0x800E3418, b'\x10\x00', b'\x09\x00'), (0x800E341A, b'\x09\x00', b'\x06\x00')]  # Yashahime: 44 px
 # Typewriter (0x8003BC64): gp+0x418 += 1 per frame + speed[setting], one glyph appears at >= 15. English draws ~2x the
 # glyphs of Japanese, so lines took twice as long and players saw half-typed text (issue #1). Frames per glyph per
 # setting 7/5/2/1 -> 3/2/1/1 (speed 1/2/5/12 -> 4/5/7/12; 15+ would show a whole page at once).
