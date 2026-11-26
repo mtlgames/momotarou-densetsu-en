@@ -29,9 +29,7 @@ SHOP_BUY[#SHOP_BUY + 1] = { 240, "-" }; SHOP_BUY[#SHOP_BUY + 1] = { 6, "circle" 
 local ITEMS = {}                                             -- inventory: 6-byte slots, u16 item id (0xFFFF empty)
 for i = 0, 23 do ITEMS[#ITEMS + 1] = { 0x8009133A + 6 * i, 2, i + 1 } end
 local BAG = { { 0x80091312, 2, 1 }, { 0x80091314, 2, 1 }, { 0x80091316, 2, 1 } }  -- 96 items + all 4 HUD names (#1)
-for i = 0, 95 do BAG[#BAG + 1] = { 0x8009133A + 6 * i, 2, i + 1 } end
-local TICKET = { { 0x80091312, 2, 1 }, { 0x80091314, 2, 1 }, { 0x8009133A, 2, 160 }, { 0x8009133C, 2, 1 } }
-local PARTY = {}                                           -- u16 per character id != 0: with the party (0x8003FB64)
+for i = 0, 95 do BAG[#BAG + 1] = { 0x8009133A + 6 * i, 2, i + 1 } endlocal PARTY = {}                                           -- u16 per character id != 0: with the party (0x8003FB64)
 for id = 4, 13 do PARTY[#PARTY + 1] = { 0x80091310 + 2 * id, 2, 1 } end
 local SKILLS = { { 0x8009195C, 2, 0xFFFF } }                -- every companion skill unlocked (bits read at 0x80040568)
 for _, p in ipairs(PARTY) do SKILLS[#SKILLS + 1] = p end
@@ -75,9 +73,7 @@ return {
   menu_jutsu     = { map = 1, settle = 90, route = menu(1) },
   menu_dougu     = { map = 1, settle = 90, route = menu(2) },
   menu_items     = { map = 1, settle = 90, route = menu(2), pokes = ITEMS },  -- item list, items 1-24
-  menu_bag       = { map = 1, settle = 90, route = menu(2), pokes = BAG },    -- full bag: glyph pool load (#1)
-  menu_ticket    = { map = 3, x = 30, y = 30, settle = 90, route = menu(2), pokes = TICKET },  -- 3-line desc (#1)
-  -- techniques: 9 learned bits per member at 0x800FE3A8 + 2 * member (flag check 0x800FC0C8, count 0x800DF5A4)
+  menu_bag       = { map = 1, settle = 90, route = menu(2), pokes = BAG },    -- full bag: glyph pool load (#1)  -- techniques: 9 learned bits per member at 0x800FE3A8 + 2 * member (flag check 0x800FC0C8, count 0x800DF5A4)
   menu_techs     = { map = 1, settle = 90, route = menu(1), hold = { { 0x800FE3A8, 2, 0x1FF } } },
   menu_tsuyosa   = { map = 1, settle = 90, route = menu(3) },
   menu_shiraberu = { map = 1, settle = 90, route = menu(0, true) },
